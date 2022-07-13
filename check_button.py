@@ -8,7 +8,7 @@ class Tela():
 
         self.v1 = tk.IntVar()
         self.v2 = tk.IntVar()
-        
+
         self.ckb_1 = tk.Checkbutton(self.janela, text="Opção 1", variable=self.v1,bg="blue").pack()
         self.ckb_1 = tk.Checkbutton(self.janela, text="Opção 2", variable=self.v2,bg="green").pack()
 

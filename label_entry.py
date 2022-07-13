@@ -5,6 +5,7 @@ class Tela():
         self.janela = master
         self.janela.title("Exemplo label com Entry")
         self.janela.minsize(300,450)
+
         #na label primeiro deve ser adicionado "o pai" da variavel, e dps suas opções
         self.lbl_nome = tk.Label(self.janela, text="Nome:", font=("calibre",10,'bold'))
         self.lbl_nome.pack()
