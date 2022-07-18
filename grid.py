@@ -1,8 +1,8 @@
 import tkinter as tk
 
 janela = tk.Tk()
-janela.geometry('330x130')
-
+janela.geometry('300x200')
+janela.title('titulo')
 lbl1 = tk.Label(janela, text='Usuario')
 lbl1.grid(row=0, column=0)
 
@@ -16,6 +16,6 @@ lbl2.grid(row=1,column=0)
 ent2.grid(row=1,column=1)
 
 btn = tk.Button(janela, text='Logar')
-btn.grid(row=2,column=1)
+btn.grid(row=2,column=1, stick=tk.EW)
 
 janela.mainloop()
