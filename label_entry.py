@@ -15,8 +15,11 @@ class Tela():
         #botão
         self.btn_logar = tk.Button(self.janela, text="Logar", command=self.janela.destroy).pack()
         #self.btn_sair = tk.Button(self.janela, text="DESTROY", command=self.janela.destroy,height=10,width=20).pack()
-        
+        self.janela.mainloop
 #pode ser qlqr nome no APP// mainloop na variavel p manter aberto
+
+
 app = tk.Tk()
 Tela(app)
 app.mainloop()
+

@@ -26,10 +26,12 @@ class Gerenciador_pack():
         self.lbl_blu =tk.Label(self.janela, text='Blue',bg='blue',height=2).pack(fill=tk.X)
         self.lbl_gr1 =tk.Label(self.janela, text='Gray',bg='gray',width=7).pack(side=tk.LEFT,fill=tk.Y)
         self.lbl_gr2 =tk.Label(self.janela, text='Gray',bg='gray',width=7).pack(side=tk.RIGHT,fill=tk.Y)
-        self.lbl_cya =tk.Label(self.janela, text='Cyan',bg='cyan').pack()
-        self.lbl_mag =tk.Label(self.janela, text='Magenta',bg='magenta').pack()
-        self.lbl_yel =tk.Label(self.janela, text='Yellow',bg='yellow').pack()
-        self.lbl_bla =tk.Label(self.janela, text='Black',bg='black').pack()
+
+        self.lbl_mag =tk.Label(self.janela, text='Magenta',bg='magenta').pack(side=tk.LEFT)
+        self.lbl_yel =tk.Label(self.janela, text='Yellow',bg='yellow').pack(side=tk.RIGHT)
+        self.lbl_cya = tk.Label(self.janela, text='Cyan', bg='cyan').pack()
+
+        self.lbl_bla =tk.Label(self.janela, text='Black',bg='black',width=10,height=10).pack(side=tk.BOTTOM,fill=tk.BOTH)
 
 
 v = tk.Tk()
