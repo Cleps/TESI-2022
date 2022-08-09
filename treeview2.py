@@ -5,11 +5,14 @@ class Tela:
     def __init__(self, master):
         self.janela = master
         self.janela.title("Exemplo Treeview TABELA")
-        self.janela.geometry('440x400')
+        self.janela.geometry('480x280')
+
+        self.frame = tk.Frame(self.janela)
+        self.frame.pack()
 
         colunas = ["Nome", 'CPF', 'Email']
 
-        self.tvw = ttk.Treeview(self.janela,show="headings", columns=colunas)
+        self.tvw = ttk.Treeview(self.frame,show="headings", columns=colunas)
         self.tvw.pack(side=tk.LEFT)
 
         #------CABEÇALHO
@@ -25,7 +28,7 @@ class Tela:
         self.tvw.insert("", 'end', values=('Nome', 'CPF', 'Email'))
         self.tvw.insert("", 'end', values=('Nome', 'CPF', 'Email'))
 
-        self.scr = tk.Scrollbar(self.janela, command=self.tvw.yview).pack(side=tk.RIGHT,fill=tk.Y)
+        self.scr = tk.Scrollbar(self.frame, command=self.tvw.yview).pack(side=tk.RIGHT,fill=tk.Y)
 
 app = tk.Tk()
 Tela(app)
