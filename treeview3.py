@@ -28,9 +28,10 @@ class Tela:
         self.tvw.column('CPF', minwidth=0, width=150)
         self.tvw.column('Email', minwidth=0, width=200)
 
-        self.tvw.insert("", 'end', values=('Nome', 'CPF', 'Email'))
-        self.tvw.insert("", 'end', values=('Nome', 'CPF', 'Email'))
-        self.tvw.insert("", 'end', values=('Nome', 'CPF', 'Email'))
+#---------EXEMPLOS INSERIDOS MANUALMENTE
+        self.tvw.insert("", 'end', values=('Rogerio', '23434234', 'rogerio@emailmassa.com'))
+        self.tvw.insert("", 'end', values=('Machon', '234234234', 'Maxon@email.com'))
+        self.tvw.insert("", 'end', values=('Maicow Jacks', '234234234234', 'rusbé@gmail.com'))
         
 
 
