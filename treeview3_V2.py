@@ -42,8 +42,13 @@ class Tela:
 
         self.btn_cad = tk.Button(self.btn_frm, text="Cadastrar", command=self.tela_cadastrar)
         self.btn_cad.pack()
+        
+        self.btn_del = tk.Button(self.btn_frm, text="Deletar", command=self.deletar_selecionar)
+        self.btn_del.pack()
 
-
+    def deletar_selecionar(self):
+        selecionado = self.tvw.selection()
+        self.tvw.delete(selecionado)
     def tela_cadastrar(self):
         
 
