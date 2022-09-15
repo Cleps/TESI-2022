@@ -1,88 +1,69 @@
+from re import S
 import tkinter as tk
-from tkinter import ttk
+from tkinter import SCROLL, messagebox, ttk
+from interface import *
 
+#o banco precisa ter um ID autoincrement
+#chamar o att treview qndo inserir
 
-class Tela:
+class TelaCliente:
     def __init__(self, master):
         self.janela = master
-        self.janela.geometry("840x620")
-        self.janela.title("BDB Registrer")
-        # -----------TEMA -- EDIÇÃO DOS STYLES
-        s = ttk.Style()
-        s.theme_use('alt')
-        # ---------pra ficar GROSSO
-        s.configure('Treeview', rowheight=40)
+        self.janela.geometry('420x420')
+        self.janela.title('Cadastro de Cliente')
 
-        colunas = ['Nomes', 'Vitorias', 'Derrotas']
-        self.frm = tk.Frame(self.janela)
-        self.frm.pack()
-        self.frm_btn = tk.Frame(self.janela)
-        self.frm_btn.pack()
-#-------------------------------------------------------------------------------------------------------------
-        self.tvw = ttk.Treeview(self.frm, show="headings", columns=colunas, height=13)
-        self.tvw.pack()
-        self.tvw.heading('Nomes', text='Nome')
-        self.tvw.heading('Vitorias', text='Vitorias')
-        self.tvw.heading('Derrotas', text='Derrotas')
-        self.tvw.column('Nomes', minwidth=0, width=300)
-        self.tvw.column('Vitorias', minwidth=0, width=100)
-        self.tvw.column('Derrotas', minwidth=0, width=100)
+        self.frm_top = tk.Frame(self.janela)
+        self.frm_top.pack(side=tk.TOP)
 
-        for i in range(1):
-            self.tvw.insert('', 'end', values=['Cleps', 0, 0])
+        self.lbl_nom = tk.Label(self.frm_top, text='Nome:')
+        self.lbl_nom.grid(row=0,column=0)
+        self.lbl_cpf = tk.Label(self.frm_top, text='CPF:')
+        self.lbl_cpf.grid(row=1,column=0)
+        self.ent_nom = tk.Entry(self.frm_top, width=20)
+        self.ent_nom.grid(row=0,column=1)
+        self.ent_cpf = tk.Entry(self.frm_top, width=20)
+        self.ent_cpf.grid(row=1, column=1)
+        self.btn_cnf = tk.Button(self.frm_top, text='CONFIRMAR', command=self.inserir)
+        self.btn_cnf.grid(row=2, column=1)
 
-        # --------------BUTTONS E LABELS
-        self.btn_vic = tk.Button(self.frm_btn, text="Vitoria +", bg="dodger blue", height=2, width=10,
-                                 command=self.incrementar_vic)
-        self.btn_vic.pack(side=tk.LEFT)
-        self.btn_der = tk.Button(self.frm_btn, text="Derrota +", bg="dodger blue", height=2, width=10,
-                                 command=self.incrementar_der)
-        self.btn_der.pack(side=tk.LEFT)
+        create_table_banco()
+#----------------------------------------------------------------------
+        
+        self.frm_bot = tk.LabelFrame(self.janela)
+        self.frm_bot.pack(side=tk.BOTTOM)
 
-        self.btn_vic_min = tk.Button(self.frm_btn, text="Vitoria -", bg="pale violet red", height=1, width=10,
-                                     command=self.decrementar_vic)
-        self.btn_vic_min.pack(side=tk.TOP)
-        self.btn_der_min = tk.Button(self.frm_btn, text="Derrota -", bg="pale violet red", height=1, width=10,
-                                     command=self.decrementar_der)
-        self.btn_der_min.pack(side=tk.BOTTOM)
+        colunas = ['Nome', 'CPF']
+        self.tvw_cli = ttk.Treeview(self.frm_bot, columns=colunas, height=8, show='headings')
+        self.tvw_cli.grid(row=0, column=0)
 
-    def incrementar_vic(self):
-        selecionado = self.tvw.selection()
-        itens = self.tvw.item(selecionado, 'values')
-        vic = int(itens[1])
-        vic += 1
-        nome = itens[0]
-        derrotas = itens[2]
-        self.tvw.item(selecionado, values=[nome, vic, derrotas])
+        self.tvw_cli.heading('Nome', text='Nome')
+        self.tvw_cli.column('Nome', minwidth=0, width=100)
+        self.tvw_cli.heading('CPF', text='CPF')
+        self.tvw_cli.column('CPF', minwidth=0, width=100)
 
-    def decrementar_vic(self):
-        selecionado = self.tvw.selection()
-        itens = self.tvw.item(selecionado, 'values')
-        vic = int(itens[1])
-        vic -= 1
-        nome = itens[0]
-        derrotas = itens[2]
-        self.tvw.item(selecionado, values=[nome, vic, derrotas])
+        self.scr = tk.Scrollbar(self.frm_bot, command=self.tvw_cli.yview, width=25)
+        self.scr.grid(row=0, column=1, sticky=tk.NS)
+        self.scr.configure(SCROLL=self.tvw_cli)
 
-    def incrementar_der(self):
-        selecionado = self.tvw.selection()
-        itens = self.tvw.item(selecionado, 'values')
-        vic = itens[1]
-        nome = itens[0]
-        derrotas = int(itens[2])
-        derrotas += 1
-        self.tvw.item(selecionado, values=[nome, vic, derrotas])
+        self.btn_att = tk.Button(self.frm_bot, text='Atualizar tabela')
+        self.btn_att.grid(row=1, column=0)
 
-    def decrementar_der(self):
-        selecionado = self.tvw.selection()
-        itens = self.tvw.item(selecionado, 'values')
-        vic = itens[1]
-        nome = itens[0]
-        derrotas = int(itens[2])
-        derrotas -= 1
-        self.tvw.item(selecionado, values=[nome, vic, derrotas])
+
+    def inserir(self):
+        nome = self.ent_nom.get()
+        cpf = self.ent_cpf.get()
+        if nome=='' or cpf=='':
+            messagebox.showerror('ERRO', 'Nenhum campo pode estar vazio')
+        else:
+            inserir_banco(nome, cpf)
+            messagebox.showinfo('Concluido!', 'Cliente inserido com sucesso!')
+
+
+
+        
+
 
 
 app = tk.Tk()
-Tela(app)
+TelaCliente(app)
 app.mainloop()
