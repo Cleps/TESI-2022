@@ -34,3 +34,40 @@ def inserir_banco(nome, cpf):
         con.close()
     except Error as er:
         print(er)
+
+def consultar():
+    try:
+        con = conectar_banco()
+        cursor = con.cursor()
+
+        cursor.execute('SELECT * FROM clientes')
+        consulta = cursor.fetchall()
+  
+        con.close()
+        return consulta
+    except Error as er:
+        print(er)
+
+def deletar(id):
+    try:
+        con = conectar_banco()
+        cursor = con.cursor()
+        
+        cursor.execute(f'DELETE FROM clientes WHERE id="{id}"')
+        
+        con.commit()
+        con.close()
+    except Error as er:
+        print(er)
+
+def atualizar(id, nome, cpf):
+    try:
+        con = conectar_banco()
+        cursor = con.cursor()
+        
+        cursor.execute(f'UPDATE clientes SET nome="{nome}", cpf="{cpf}" WHERE id="{id}"')
+        
+        con.commit()
+        con.close()
+    except Error as er:
+        print(er)
