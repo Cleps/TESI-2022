@@ -1,6 +1,17 @@
 import sqlite3
 from sqlite3 import Error
 
+
+'''
+INTERFACE COM FUNÇÕES UTEIS DO BANCO DE DADOS, CRIANDO UM BANCO DE CLIENTES COM NOME E CPF
+conectar_banco = cria um 'banco.db' caso não exista
+create_table_banco = cria uma tabela de clientes caso não exista
+inserir_banco(nome, cpf) = passe o nome e o cpf de um cliente para inserir no bd
+consultar = retorna todos os dados do bd
+deletar = deleta um cliente pela id do mesmo
+atualizar(id, nome, cpf) = passe um novo nome e novo cpf e a id do cliente q deseja atualizar os dados
+'''
+
 def conectar_banco():
     try:
         con = None
